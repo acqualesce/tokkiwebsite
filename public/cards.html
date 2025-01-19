@@ -154,11 +154,11 @@ const fetchCards = async () => {
       const currentCards = filteredCards.slice(start, end);
   
       currentCards.forEach(card => {
-  console.log('Image URL:', card.image); // Debug log
+  console.log('Image URL:', card.imagePath); // Debug log
   const cardElement = document.createElement('div');
   cardElement.classList.add('card');
   cardElement.innerHTML = `
-    <img src="${card.image}" alt="${card.name}" class="card-image">
+    <img src="${card.imagePath}" alt="${card.name}" class="card-image">
     <div class="card-info">
       <h3>${card.name}</h3>
       <p><strong>Group:</strong> ${card.group}</p>
@@ -166,7 +166,7 @@ const fetchCards = async () => {
       <p><strong>Card ID:</strong> ${card.id}</p>
     </div>
     <div class="card-overlay">
-      <button onclick="viewImage('${card.image}')">View Image</button>
+      <button onclick="viewImage('${card.imagePath}')">View Image</button>
     </div>
   `;
   container.appendChild(cardElement);
