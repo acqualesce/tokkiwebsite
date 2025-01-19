@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Banner Section -->
+  <div class="banner">
+    <div class="navigation-buttons">
+      <div class="left-nav">
+        <a href="/" aria-label="Home">
+          <img src="webimgs/home.png" alt="Home" class="home-icon">
+        </a>
+      </div>
+      <div class="right-nav">
+        <a href="#contactStaff">Contact Staff</a>
+        <a href="/commands.html">Commands</a>
+        <a href="/cards-options.html">Cards</a>
+      </div>
+    </div>
+    <img src="webimgs/njbanner.jpg" alt="Tokki Banner">
+    <div class="banner-vignette"></div>
+    <div class="banner-outline"></div>
+  </div>
+
+ <!-- Main Dashboard Section -->
+<div class="dashboard-container">
+    <% if (user) { %> 
+        <h1>Welcome, <%= user.username %>!</h1>
+        <p>Logged in with Discord. Welcome to Tokki Admin Portal:</p>
+      
+        <!-- User Profile Information -->
+        <div class="profile-card">
+          <img src="<%= user.avatarURL %>" alt="User Avatar" class="profile-avatar">
+          <div class="profile-info">
+            <h2><%= user.username %></h2>
+            <p>ID: <%= user.id %></p>
+            <p>Tag: <%= user.tag %></p>
+          </div>
+        </div>
+      <% } else { %>
+        <h1>Not logged in</h1>
+        <p>Please log in to access the dashboard.</p>
+      <% } %>
+      
+      
+  
+   <!-- Dashboard Buttons -->
+<div class="dashboard-buttons">
+  <a href="/add-card" class="dashboard-button">
+    <button>Add Card 📇</button>
+  </a>
+  <a href="/commands.html" class="dashboard-button">
+    <button>Show All Commands 📝</button>
+  </a>
+  <a href="#edit-cards" class="dashboard-button">
+    <button>Edit Cards ✏️</button>
+  </a>
+  <a href="/cards-options.html" class="dashboard-button">
+    <button>Show All Cards 🃏</button>
+  </a>
+</div>
+
+  
+
+
+  
+
+  <!-- JavaScript for Scroll Animations (Optional) -->
+  <script>
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return rect.top <= window.innerHeight && rect.bottom >= 0;
+    }
+
+    function handleScroll() {
+      const elements = document.querySelectorAll('.fade-in-up');
+      elements.forEach(element => {
+        if (isInViewport(element)) {
+          element.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+  </script>
+</body>
+</html>

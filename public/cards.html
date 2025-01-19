@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Cards - Tokki Bot</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+   <!-- Banner Section -->
+   <div class="banner">
+    <div class="navigation-buttons">
+      <div class="left-nav">
+        <a href="/" aria-label="Home">
+          <img src="webimgs/home.png" alt="Home" class="home-icon">
+        </a>
+        </div>
+      <div class="right-nav">
+        <a href="#contactStaff">Contact Staff</a>
+        <a href="commands.html">Commands</a>
+        <a href="cards-options.html">Cards</a>
+      </div>
+    </div>
+    <img src="webimgs/njbanner.jpg" alt="Tokki Banner">
+    <div class="banner-vignette"></div>
+    <div class="banner-outline"></div>
+  </div>
+
+
+    <!-- Back Button -->
+    <div class="back-button-container">
+      <a href="cards-options.html" class="back-button">← Back</a>
+    </div>
+    
+  <!-- Main content container -->
+  <div class="main-container">
+    <div class="text-container">
+      <h1>Showing Cards</h1>
+      <p id="additional-description"></p>
+      <p><strong>Total Cards Available:</strong> <span id="total-cards">Loading...</span></p>
+
+    </div>
+    
+  </div>
+
+  <!-- Search and Filter Section -->
+  <div class="search-container">
+    <select id="filter-options">
+      <option value="name">Name</option>
+      <option value="group">Group</option>
+      <option value="theme">Theme</option>
+    </select>
+    <input type="text" id="search-bar" placeholder="Search cards...(ex. Minji or Tokki Editions)" oninput="filterCards()" />
+  </div>
+
+  <div class="pagination" style="margin-bottom: 20px;">
+    <button class="prev" onclick="changePage(-1)">Prev</button>
+    <button class="next" onclick="changePage(1)">Next</button>
+  </div>
+  
+
+
+  <!-- Cards and Pagination Container -->
+  <div class="cards-pagination-container">
+    <!-- Cards grid -->
+    <div id="cards-container" class="cards-container"></div>
+
+    <div class="pagination" style="margin-bottom: 20px;">
+      <button class="prev" onclick="changePage(-1)">Prev</button>
+      <button class="next" onclick="changePage(1)">Next</button>
+    </div>
+    
+
+    
+    <!-- Modal for Image View -->
+    <div id="image-modal" class="modal">
+      <span class="close" onclick="closeModal()">×</span>
+      <img id="modal-image" class="modal-content" alt="Expanded Card Image">
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-main">
+      <div class="footer-section">
+        <h3>🌐 Community</h3>
+        <p><a href="https://discord.gg/tokkibot" target="_blank">Join our Discord</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>👤 Owner</h3>
+        <p><a href="https://discord.com/users/984311219110424657" target="_blank">@yopeoki</a></p>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      <h3>⚠️ Disclaimer</h3>
+      <p>
+        Tokki is a fan project and is <b>not affiliated with or endorsed</b> by any official entity related to the branding it mimics. 
+        All rights to the original intellectual property belong to their respective owners.
+      </p>
+    </div>
+  </div>
+  <!-- Copyright Notice -->
+  <div class="footer-copyright">
+    <p>&copy; 2022–2025. Tokki. All Rights Reserved.</p>
+  </div>
+</footer>
+
+  <!-- JavaScript to load, filter, and paginate cards -->
+  <script>
+    let cards = [];
+    let filteredCards = [];
+    let currentPage = 1;
+    const cardsPerPage = 20;
+    let totalPages = 0;
+  
+    // Get the type parameter from the URL
+    // Extract the 'type' parameter from the URL
+const urlParams = new URLSearchParams(window.location.search);
+const cardType = urlParams.get('type') || 'droppable'; // Default to 'droppable'
+
+// Fetch cards based on the selected type
+const fetchCards = async () => {
+  try {
+    const response = await fetch(`/api/cards?type=${cardType}`);
+    if (!response.ok) throw new Error('Failed to fetch cards');
+
+    const data = await response.json();
+    cards = data; // Assign data directly from API
+    filteredCards = [...cards];
+    totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+
+    // Update total card count
+    document.getElementById('total-cards').textContent = cards.length;
+
+    displayCards(currentPage);
+  } catch (error) {
+    console.error('Error loading cards:', error);
+    document.getElementById('total-cards').textContent = 'Error loading cards.';
+  }
+};
+
+  
+    // Fetch cards when the page loads
+    fetchCards();
+  
+    function displayCards(page) {
+      const container = document.getElementById('cards-container');
+      container.innerHTML = '';
+  
+      const start = (page - 1) * cardsPerPage;
+      const end = start + cardsPerPage;
+      const currentCards = filteredCards.slice(start, end);
+  
+      currentCards.forEach(card => {
+  console.log('Image URL:', card.image); // Debug log
+  const cardElement = document.createElement('div');
+  cardElement.classList.add('card');
+  cardElement.innerHTML = `
+    <img src="${card.image}" alt="${card.name}" class="card-image">
+    <div class="card-info">
+      <h3>${card.name}</h3>
+      <p><strong>Group:</strong> ${card.group}</p>
+      <p><strong>Theme:</strong> ${card.theme}</p>
+      <p><strong>Card ID:</strong> ${card.id}</p>
+    </div>
+    <div class="card-overlay">
+      <button onclick="viewImage('${card.image}')">View Image</button>
+    </div>
+  `;
+  container.appendChild(cardElement);
+});
+
+  
+      document.querySelector('.prev').disabled = page === 1;
+      document.querySelector('.next').disabled = page === totalPages;
+    }
+  
+    function changePage(direction) {
+      currentPage += direction;
+      if (currentPage < 1) currentPage = 1;
+      if (currentPage > totalPages) currentPage = totalPages;
+      displayCards(currentPage);
+    }
+  
+    function filterCards() {
+      const filterOption = document.getElementById('filter-options').value;
+      const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+  
+      filteredCards = cards.filter(card => {
+        const value = card[filterOption]?.toLowerCase() || '';
+        return value.includes(searchTerm);
+      });
+  
+      currentPage = 1; // Reset to the first page of search results
+      totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+      displayCards(currentPage);
+    }
+  
+    function viewImage(imageSrc) {
+      const modal = document.getElementById('image-modal');
+      const modalImage = document.getElementById('modal-image');
+  
+      modal.style.display = 'flex'; // Show the modal
+      modalImage.src = imageSrc; // Set the modal image source
+    }
+  
+    function closeModal() {
+      const modal = document.getElementById('image-modal');
+      modal.style.display = 'none'; // Hide the modal
+    }
+  </script>
+  
+
+</body>
+</html>

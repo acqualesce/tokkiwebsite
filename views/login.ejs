@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Banner with navigation words instead of buttons -->
+  <div class="banner">
+    <div class="navigation-buttons">
+      <!-- Left side: Home Icon and Login -->
+      <div class="left-nav">
+        <a href="/" aria-label="Home">
+          <img src="webimgs/home.png" alt="Home" class="home-icon">
+        </a>
+        <a href="/auth/discord">
+          <button class="discord-button">Login with Discord</button>
+        </a>
+      </div>
+      
+      <!-- Right side: Other links -->
+      <div class="right-nav">
+        <a href="#contactStaff">Contact Staff</a>
+        <a href="commands.html">Commands</a>
+        <a href="cards-options.html">Cards</a>
+      </div>
+    </div>
+    <img src="webimgs/njbanner.jpg" alt="Tokki Banner">
+    <!-- Add the vignette effect -->
+    <div class="banner-vignette"></div>
+    <!-- Add outline at the bottom -->
+    <div class="banner-outline"></div>
+  </div>
+  
+  <!-- Main Login Section -->
+  <div class="main-container">
+    <!-- Text Container -->
+    <div class="text-container">
+      <h1>Welcome to Tokki!</h1>
+      <p>Log in to access tokki bot admin portal. <b>If you are not an admin of tokki bot please do not log-in.</b></p>
+      <a href="/auth/discord">
+        <button class="discord-button">Login with Discord</button>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Footer Section -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-main">
+        <div class="footer-section">
+          <h3>🌐 Community</h3>
+          <p><a href="https://discord.gg/tokkibot" target="_blank">Join our Discord</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>👤 Owner</h3>
+          <p><a href="https://discord.com/users/984311219110424657" target="_blank">@yopeoki</a></p>
+        </div>
+      </div>
+      <div class="footer-disclaimer">
+        <h3>⚠️ Disclaimer</h3>
+        <p>
+          Tokki is a fan project and is <b>not affiliated with or endorsed</b> by any official entity related to the branding it mimics. 
+          All rights to the original intellectual property belong to their respective owners.
+        </p>
+      </div>
+    </div>
+    <!-- Copyright Notice -->
+    <div class="footer-copyright">
+      <p>&copy; 2022–2025. Tokki. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Scroll Animations -->
+  <script>
+    // Function to check if an element is in the viewport
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return rect.top <= window.innerHeight && rect.bottom >= 0;
+    }
+
+    // Function to add the 'visible' class to elements in the viewport
+    function handleScroll() {
+      const elements = document.querySelectorAll('.fade-in-up'); // Select all elements with the fade-in-up class
+      elements.forEach(element => {
+        if (isInViewport(element)) {
+          element.classList.add('visible'); // Add visible class when element is in the viewport
+        }
+      });
+    }
+
+    // Listen for the scroll event
+    window.addEventListener('scroll', handleScroll);
+
+    // Call handleScroll once to show elements if they are already in view
+    handleScroll();
+  </script>
+</body>
+</html>

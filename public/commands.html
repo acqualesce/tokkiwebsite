@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commands - Tokki Bot</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+   <!-- Banner Section -->
+   <div class="banner">
+    <div class="navigation-buttons">
+      <div class="left-nav">
+        <a href="/" aria-label="Home">
+          <img src="webimgs/home.png" alt="Home" class="home-icon">
+        </a>
+      </div>
+      <div class="right-nav">
+        <a href="#contactStaff">Contact Staff</a>
+        <a href="commands.html">Commands</a>
+        <a href="cards-options.html">Cards</a>
+      </div>
+    </div>
+    <img src="webimgs/njbanner.jpg" alt="Tokki Banner">
+    <div class="banner-vignette"></div>
+    <div class="banner-outline"></div>
+  </div>
+
+  <div class="commands-page">
+    <!-- Search Bar -->
+    <div class="search-container">
+      <input type="text" id="search-bar" placeholder="Search commands..." oninput="searchCommands()" />
+    </div>
+  
+    <!-- Main Container -->
+    <div class="main-container">
+      <!-- Categories Section -->
+      <div class="categories-container">
+        <h2>Categories</h2>
+        <ul>
+          <li><a href="#" onclick="displayCommands(commands)">All</a></li>
+          <li><a href="#" onclick="filterCommands('economy')">Economy</a></li>
+          <li><a href="#" onclick="filterCommands('main')">Main Commands</a></li>
+          <li><a href="#" onclick="filterCommands('cosmetics')">Cosmetics</a></li>
+        </ul>
+      </div>
+      
+  
+      <!-- Commands Section -->
+      <div class="commands-container">
+        <h2>Commands</h2>
+        <div id="commands-list">
+          <!-- Commands will be dynamically injected here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer Section -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-main">
+        <div class="footer-section">
+          <h3>🌐 Community</h3>
+          <p><a href="https://discord.gg/tokkibot" target="_blank">Join our Discord</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>👤 Owner</h3>
+          <p><a href="https://discord.com/users/984311219110424657" target="_blank">@yopeoki</a></p>
+        </div>
+      </div>
+      <div class="footer-disclaimer">
+        <h3>⚠️ Disclaimer</h3>
+        <p>
+          Tokki is a fan project and is <b>not affiliated with or endorsed</b> by any official entity related to the branding it mimics. 
+          All rights to the original intellectual property belong to their respective owners.
+        </p>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <p>&copy; 2022–2025. Tokki. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    const commands = [
+      { name: '!balance', category: 'economy', description: 'Check your balance.', example: '!balance' },
+      { name: '!daily', category: 'economy', description: 'Claim your daily reward.', example: '!daily' },
+      { name: '!profile', category: 'main', description: 'View your profile.', example: '!profile' },
+      { name: '!settheme', category: 'cosmetics', description: 'Set a theme for your profile.', example: '!settheme [theme-name]' }
+    ];
+
+    const commandsList = document.getElementById('commands-list');
+
+    function displayCommands(filteredCommands) {
+      commandsList.innerHTML = '';
+      filteredCommands.forEach(command => {
+        const commandElement = document.createElement('div');
+        commandElement.classList.add('command-item');
+        commandElement.innerHTML = `
+          <h3>${command.name}</h3>
+          <p><strong>Description:</strong> ${command.description}</p>
+          <p><strong>Example:</strong> <code>${command.example}</code></p>
+        `;
+        commandsList.appendChild(commandElement);
+      });
+    }
+
+    function filterCommands(category) {
+      const filtered = commands.filter(command => command.category === category);
+      displayCommands(filtered);
+    }
+
+    const searchInput = document.getElementById('search-bar'); // Corrected ID here
+
+function searchCommands() {
+  const searchTerm = searchInput.value.toLowerCase();
+  const filtered = commands.filter(command => 
+    command.name.toLowerCase().includes(searchTerm) ||
+    command.description.toLowerCase().includes(searchTerm)
+  );
+  displayCommands(filtered);
+}
+
+    // Display all commands initially
+    displayCommands(commands);
+  </script>
+</body>
+</html>

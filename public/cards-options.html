@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Options - Tokki Bot</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <!-- Banner with navigation -->
+  <div class="banner">
+    <div class="navigation-buttons">
+      <div class="left-nav">
+        <a href="/" aria-label="Home">
+          <img src="webimgs/home.png" alt="Home" class="home-icon">
+        </a>
+      </div>
+      <div class="right-nav">
+        <a href="#contactStaff">Contact Staff</a>
+        <a href="commands.html">Commands</a>
+        <a href="cards-options.html">Cards</a>
+      </div>
+    </div>
+    <img src="webimgs/njbanner.jpg" alt="Tokki Banner">
+    <div class="banner-vignette"></div>
+    <div class="banner-outline"></div>
+  </div>
+
+  <!-- Card Options Section -->
+  <div class="card-options-container">
+    <h1>Select Card Type</h1>
+    <p>Choose the type of cards you want to view:</p>
+    <div class="card-options">
+      <button onclick="navigateToCards('droppable')"><span>🃏</span> Droppable Cards</button>
+      <button onclick="navigateToCards('archived')"><span>📦</span> Archived Cards</button>
+      <button onclick="navigateToCards('all')"><span>📚</span> All Cards</button>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-main">
+        <div class="footer-section">
+          <h3>🌐 Community</h3>
+          <p><a href="https://discord.gg/tokkibot" target="_blank">Join our Discord</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>👤 Owner</h3>
+          <p><a href="https://discord.com/users/984311219110424657" target="_blank">@yopeoki</a></p>
+        </div>
+      </div>
+      <div class="footer-disclaimer">
+        <h3>⚠️ Disclaimer</h3>
+        <p>
+          Tokki is a fan project and is <b>not affiliated with or endorsed</b> by any official entity related to the branding it mimics. 
+          All rights to the original intellectual property belong to their respective owners.
+        </p>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <p>&copy; 2022–2025. Tokki. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript for navigation -->
+  <script>
+    // Navigate to cards.html with the selected card type
+    function navigateToCards(type) {
+      window.location.href = `cards.html?type=${type}`;
+    }
+  </script>
+
+</body>
+</html>

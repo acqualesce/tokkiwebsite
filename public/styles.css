@@ -1,0 +1,1013 @@
+/* General styles for the whole page */
+@font-face {
+    font-family: 'font1';
+    src: url('./fonts/Moderniz.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'font2';
+    src: url('./fonts/Garet-Book.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* General Styles for the body */
+  body {
+    font-family: 'font2', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #feffff;
+    color: #333;
+    font-size: 0.8em; /* Reduced font size globally */
+  }
+  
+  /* Banner container */
+  .banner {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Adjust the height as needed */
+    overflow: hidden;
+  }
+  
+  /* Apply vignette effect only from the bottom */
+  .banner-vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1.5), rgba(0, 0, 0, 0)); /* Vignette fades from bottom */
+    z-index: 2;
+  }
+  
+  .banner img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    object-position:center top; /* Align the image to the top, no cropping */
+    z-index: 1; /* Ensure the image is below the vignette */
+  }
+  
+  
+  /* Outline at the lower part of the banner */
+  .banner-outline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px; /* Outline height */
+    background-color: #007acc; /* Outline color */
+    z-index: 3;
+  }
+  
+  /* Navigation buttons container */
+  .navigation-buttons {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%); /* Center the container horizontally */
+    z-index: 4;
+    display: flex;
+    justify-content: space-between;
+    width: 90%; /* Adjust the width as needed */
+  }
+  
+  /* Left side: Home Icon and Login */
+  .left-nav {
+    display: flex;
+    gap: -5px; /* Add some space between items */
+  }
+  
+  .left-nav a, .left-nav button {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .left-nav button {
+    padding: 8px 15px;
+    font-size: 0.95em;
+    background-color: #007acc;
+    border: none;
+    border-radius: 7%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: font2;
+  }
+  
+  .left-nav button:hover {
+    background-color: #005fa3;
+  }
+  
+  /* Right side: Other navigation links */
+  .right-nav {
+    display: flex;
+    gap: 30px; /* Add space between the links */
+  }
+  
+  .right-nav a {
+    font-family: 'font1', sans-serif;
+    color: white;
+    font-size: 0.75em;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .right-nav a:hover {
+    color: #007acc;
+  }
+  /* Other styles remain unchanged */
+  /* Specific class for home icon */
+  .home-icon {
+    width: 65px !important;
+    height: 65px !important;
+    object-fit: contain;
+    margin-right: 40px !important;
+    margin-top: -15px;
+  }
+  
+  
+  /* Main container styles */
+  .main-container {
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+    min-height: 80vh; /* Adjust the height to center properly */
+    padding: 20px; /* Add padding for spacing */
+  }
+  .image-container {
+    flex: 1;
+  }
+  
+  .text-container {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Horizontally center the content */
+    justify-content: center; /* Vertically center the content */
+    text-align: center; /* Center-align text */
+    min-height: 50vh; /* Adjust height to center within this section */
+    padding: 20px; /* Add padding for spacing */
+  }
+  
+  h1 {
+    font-size: 2em;
+    font-family: font1;
+    color: #007acc;
+    font-weight: bolder;
+  }
+  
+  p {
+    font-size: 1.1em;
+    line-height: 1.6;
+  }
+  
+  /* Fade-in effect */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Buttons at the bottom of the text */
+  .buttons {
+    margin-top: 20px;
+  }
+  
+  .buttons button {
+    background-color: #007acc;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+    font-family: font2;
+  }
+  
+  .buttons button:hover {
+    background-color: #005fa3; /* Darken on hover */
+  }
+  
+  a {
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  /* Cards and Pagination */
+  .cards-pagination-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Smaller card sizes */
+    gap: 5px; /* Reduced gap */
+    width: 90%; /* Reduced width */
+    max-width: 1500px;
+    padding: 5px;
+  }
+  
+  .card {
+    width: 90%;
+    padding: 3px; /* Reduced padding */
+    background-color: #d9f5ff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+  
+  .card:hover {
+    transform: scale(1.05); /* Slightly enlarge card on hover */
+  }
+  
+  .card-overlay {
+    position: absolute; /* Confine overlay to the parent card */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2; /* Ensure it's above the card */
+  }
+  
+  .card:hover .card-overlay {
+    opacity: 1; /* Show the overlay on hover */
+  }
+  
+  .card-overlay button {
+    padding: 5px 10px;
+    font-size: 1em;
+    font-family: 'font2', sans-serif;
+    color: white;
+    background-color: #007acc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .card-overlay button:hover {
+    background-color: #005fa3; /* Darken the button on hover */
+  }
+  
+  
+  .card {
+    position: relative; /* Ensure the overlay is confined within the card */
+    overflow: hidden; /* Prevent the overlay from spilling outside */
+  }
+  
+  .card img {
+    width: 70%; /* Reduced image size */
+    height: 100px; /* Smaller image */
+    object-fit: contain;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .card-info {
+    font-size: 0.7em; /* Smaller text */
+    color: #353434;
+    text-align: left;
+  }
+  
+  .card-info h3 {
+    font-size: 1.2em; /* Reduced size for names */
+    margin-bottom: 5px;
+  }
+  
+  .card-info p {
+    margin: 5px 0;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Reduced gap */
+    margin-top: 10px; /* Reduced margin */
+  }
+  
+  .pagination button {
+    padding: 10px 20px; /* Smaller buttons */
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-size: 1em; /* Smaller text */
+    cursor: pointer;
+  }
+  
+  .pagination button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+  
+  .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 30px 0;
+  }
+  
+  #filter-options {
+    padding: 10px;
+    border: 2px solid #66c2ff;
+    border-radius: 20px;
+    background-color: #feffff;
+    font-size: 1em;
+  }
+  
+  #search-bar {
+    padding: 10px;
+    border: 2px solid #66c2ff;
+    border-radius: 20px;
+    font-size: 1em;
+    width: 500px;
+  }
+  
+  /* Modal container */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 10; /* Above all other content */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark transparent background */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Modal content (image) */
+  .modal-content {
+    max-width: 90%; /* Limit image size */
+    max-height: 90%;
+    border-radius: 10px;
+    object-fit: contain; /* Ensure image maintains its aspect ratio */
+  }
+  
+  /* Close button */
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 11;
+  }
+  
+  
+  /* Container for title, description, and buttons */
+  .card-options-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center the items horizontally */
+    text-align: center; /* Center text in the container */
+    margin-top: 30px; /* Add space above */
+  }
+  
+  .card-options-container h2 {
+    font-family: font1; /* Apply title font */
+    color: #007acc; /* Title color */
+    font-size: 2em; /* Larger font size for title */
+    margin-bottom: 10px; /* Space between title and description */
+  }
+  
+  .card-options-container p {
+    font-family: font2; /* Apply description font */
+    color: #333; /* Description text color */
+    font-size: 1.1em; /* Adjust description size */
+    line-height: 1.5; /* Improve readability */
+    margin-bottom: 20px; /* Space between description and buttons */
+  }
+  
+  /* Container for the buttons */
+  .card-options {
+    display: flex; /* Use flexbox to align buttons in a row */
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 20px; /* Space between buttons */
+    width: 100%; /* Full width of container */
+    max-width: 600px; /* Limit the width of the buttons container */
+  }
+  
+  /* Container for title, description, and buttons */
+  .card-options-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center the items horizontally */
+    text-align: center; /* Center text in the container */
+    margin-top: 30px; /* Add space above */
+    margin-bottom: 50px; /* Add bottom margin to create space before the footer */
+  }
+  
+  .card-options-container h2 {
+    font-family: font1; /* Apply title font */
+    color: #007acc; /* Title color */
+    font-size: 2em; /* Larger font size for title */
+    margin-bottom: 10px; /* Space between title and description */
+  }
+  
+  .card-options-container p {
+    font-family: font2; /* Apply description font */
+    color: #333; /* Description text color */
+    font-size: 1.1em; /* Adjust description size */
+    line-height: 1.5; /* Improve readability */
+    margin-bottom: 20px; /* Space between description and buttons */
+  }
+  
+  /* Container for the buttons */
+  .card-options {
+    display: flex; /* Use flexbox to align buttons in a row */
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 20px; /* Space between buttons */
+    width: 100%; /* Full width of container */
+    max-width: 600px; /* Limit the width of the buttons container */
+  }
+  
+  /* Styling for the buttons */
+  .card-options button {
+    background-color: #007acc;
+    color: white;
+    padding: 15px 30px; /* Adjust padding */
+    font-size: 1.2em; /* Button text size */
+    border: none;
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: font2;
+    width: 150px; /* Fixed width for buttons */
+  }
+  
+  .card-options button:hover {
+    background-color: #005fa3; /* Darken on hover */
+  }
+  
+  .card-options button:active {
+    transform: scale(0.98); /* Slight scale down on click */
+  }
+  
+  .card-options button span {
+    margin-right: 10px; /* Space between emoji and text */
+  }
+  
+  /* Responsive styles for smaller screens */
+  @media (max-width: 768px) {
+    .card-options-container {
+      align-items: flex-start; /* Align items to the left on smaller screens */
+      text-align: left; /* Left-align text */
+    }
+  
+    .card-options {
+      flex-direction: column; /* Stack buttons vertically on small screens */
+      gap: 10px; /* Reduce the gap between buttons */
+      width: 100%; /* Ensure buttons take up full width */
+    }
+  
+    .card-options button {
+      width: 100%; /* Full-width buttons on small screens */
+    }
+  }
+  
+  /* Footer styles */
+  .site-footer {
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px 10px;
+    text-align: center;
+    border-top: 2px solid #007acc; /* Matches banner outline color */
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .footer-main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px; /* Space between sections */
+  }
+  
+  .footer-section h3 {
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: #007acc; /* Use theme color */
+  }
+  
+  .footer-section p {
+    font-size: 0.9em;
+  }
+  
+  .footer-section a {
+    color: #007acc;
+    text-decoration: none;
+  }
+  
+  .footer-section a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-disclaimer {
+    max-width: 500px; /* Limit width to avoid crowding */
+    text-align: center;
+    font-size: 0.7em;
+  }
+  
+  .footer-disclaimer h3 {
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: #007acc;
+  }
+  
+  .footer-disclaimer p {
+    line-height: 1.5; /* Increase line height for readability */
+    margin: 0;
+  }
+  
+  .footer-copyright {
+    margin-top: 15px;
+    font-size: 0.8em;
+    color: #666;
+  }
+  
+  
+  
+  /* Footer for smaller screens */
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .footer-section {
+      flex: 1 1 100%; /* Full width for smaller screens */
+    }
+  }
+  
+  .card-options button {
+    width: 80%; /* Make buttons slightly wider on small screens */
+  }
+  
+  .hero {
+    position: relative;
+    background-image: url('images/welcome.png');
+    background-size: cover;
+    background-position: center center; /* Ensures the image is centered */
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 80px 20px; /* Reduced top and bottom padding */
+    margin-top: 50px;
+  }
+  
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Darken the background image */
+    z-index: 0; /* Keeps the overlay behind the text */
+  }
+  
+  .hero .hero-text {
+    position: relative;
+    z-index: 1; /* Ensures text is above the overlay */
+    margin-top: 10px;
+  }
+  
+  .hero-description {
+    margin-bottom: 30px; /* Add more space between the description and the button */
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .hero-button {
+    position: relative;
+    padding: 20px 30px;
+    background-color: #007acc;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+    font-family: font2;
+    outline: none; /* Add this line to remove the outline */
+    box-shadow: 0 0 5px #ffffff; /* Custom focus style */
+  
+  }
+  
+  .hero-button:hover {
+    background-color: #004c7f; /* Darken on hover */
+  }
+  
+  .back-button-container {
+    text-align: left; /* Aligns the button to the left */
+    margin: 20px; /* Adds space around the button */
+  }
+  
+  .back-button {
+    display: inline-block;
+    background-color: #007bff; /* Light blue color */
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .back-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Commands Page Container */
+  .commands-page {
+    margin: 20px;
+  }
+  
+  /* Search Bar */
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  #search-bar {
+    padding: 10px;
+    border: 2px solid #66c2ff;
+    border-radius: 20px;
+    font-size: 1em;
+    width: 500px;
+  }
+  
+  /* Main Layout */
+  .main-container {
+    display: flex;
+    gap: 20px; /* Space between categories and commands */
+  }
+  
+  /* Categories container styling */
+  .categories-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .categories-container li {
+    margin: 10px 0;
+  }
+  
+  .categories-container a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #0056b3; /* Light blue */
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+  
+  .categories-container a:hover {
+    color: #003f7f; /* Darker blue */
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  
+  /* Commands Section */
+  .commands-container {
+    flex: 3;
+    padding: 15px;
+    background-color: #e6f7ff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .commands-container h2 {
+    font-family: font1;
+    font-size: 1.5em;
+    color: #007acc;
+    margin-bottom: 20px;
+  }
+  
+  .command-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #b3d9ff;
+  }
+  
+  .command-item h3 {
+    font-family: font1;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .command-item p {
+    font-family: font2;
+    font-size: 1em;
+    margin: 5px 0;
+  }
+  
+  .command-item code {
+    background-color: #d9f5ff;
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  /* Style for the Discord button */
+.discord-button {
+  background-color: #5865F2; /* Discord blue */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.discord-button:hover {
+  background-color: #4854d3; /* Slightly darker blue */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+.discord-button:active {
+  background-color: #3c46a1; /* Even darker blue on click */
+  transform: scale(1); /* Remove zoom on click */
+}
+
+  /* Container for the whole form */
+.container {
+  width: 80%;
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Style for the form itself */
+.form-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-section {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-section label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.form-section input, .form-section select {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-section input[type="file"] {
+  padding: 8px;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Style for error messages */
+.error-message {
+  color: red;
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+.error {
+  border-color: red;
+}
+
+/* Additional styles for form layout adjustments */
+.form-section input, .form-section select {
+  width: 100%;
+}
+
+#back-cover-fields, #event-cover-fields {
+  margin-top: 15px;
+}
+
+/* Add spacing between sections */
+.form-card section {
+  margin-bottom: 30px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .form-section label {
+    font-size: 0.9rem;
+  }
+
+  .form-section input, .form-section select {
+    font-size: 0.9rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 12px 16px;
+  }
+}
+
+  
+  /* Dashboard Styles */
+.dashboard-container {
+  width: 80%;
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.dashboard-container h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.dashboard-container p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.profile-info p {
+  font-size: 1rem;
+  color: #666;
+}
+
+
+/* Ensure styles only apply to dashboard buttons */
+.dashboard-buttons .dashboard-button button {
+  padding: 15px 30px; /* Adjust button padding */
+  font-size: 1.1em; /* Larger font size */
+  border-radius: 8px;
+  background-color: #f3f3f3; /* Light background */
+  color: #333;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect */
+.dashboard-buttons .dashboard-button button:hover {
+  background-color: #e1e1e1; /* Slightly darker on hover */
+  transform: scale(1.05); /* Small hover effect */
+}
+
+/* Reset styles for any other button on the page (like footer) */
+button {
+  all: unset; /* Reset all inherited styles */
+  background: none; /* Remove background if it's affected */
+  color: inherit; /* Inherit color from parent */
+}
+
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .dashboard-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #7289da;
+}
+
+#user-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.error {
+  border: 1px solid red;
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
+
+.add-another-btn {
+  background-color: #4CAF50; /* Green background for "Add Another Card" */
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.add-another-btn:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: scale(1.05); /* Slightly enlarges the button */
+}

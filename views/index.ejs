@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add K-Pop Card</title>
+
+  <link rel="stylesheet" href="/styles.css">
+
+
+</head>
+
+  <body>
+    <!-- Banner Section -->
+    <div class="banner">
+      <div class="navigation-buttons">
+        <div class="left-nav">
+          <a href="index.html" aria-label="Home">
+            <img src="webimgs/home.png" alt="Home" class="home-icon">
+          </a>
+          <% if (user) { %>
+            <a href="/dashboard">
+              <button class="discord-button">Go to Dashboard</button>
+            </a>
+          <% } else { %>
+            <a href="/auth/discord">
+              <button class="discord-button">Login with Discord</button>
+            </a>
+          <% } %>
+        </div>
+        <div class="right-nav">
+          <a href="#contactStaff">Contact Staff</a>
+          <a href="commands.html">Commands</a>
+          <a href="cards-options.html">Cards</a>
+        </div>
+      </div>
+      <img src="webimgs/njbanner.jpg" alt="Tokki Banner">
+      <div class="banner-vignette"></div>
+      <div class="banner-outline"></div>
+    </div>
+  <div class="container">
+    <h1>Add a New K-Pop Card</h1>
+
+    <form id="card-form" action="/add-card" method="POST" enctype="multipart/form-data" class="form-card">
+      <section>
+        <div class="form-section">
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" required>
+        </div>
+
+        <div class="form-section">
+          <label for="group">Group:</label>
+          <input type="text" name="group" id="group" required>
+        </div>
+
+        <div class="form-section">
+          <label for="theme">Theme:</label>
+          <input type="text" name="theme" id="theme" required>
+        </div>
+
+        <div class="form-section">
+          <label for="code">Card Code:</label>
+          <input type="text" name="code" id="code" required>
+        </div>
+
+        <div class="form-section">
+          <label for="image">Upload Image:</label>
+          <input type="file" name="image" id="image" accept="image/*" required>
+        </div>
+
+        <div class="form-section">
+          <label for="card-type">Card Type:</label>
+          <select name="card-type" id="card-type" required>
+            <option value="normal">Normal</option>
+            <option value="lim-ed">Limited Edition</option>
+            <option value="event">Event</option>
+          </select>
+        </div>
+
+        <!-- Optionally include inputs for back covers -->
+        <div id="back-cover-fields" class="form-section" style="display:none;">
+          <label for="backCover">Back Cover:</label>
+          <input type="file" name="backCover" id="backCover" accept="image/*">
+        </div>
+
+        <div id="event-cover-fields" class="form-section" style="display:none;">
+          <label for="backCoverEvent">Event Back Cover:</label>
+          <input type="file" name="backCoverEvent" id="backCoverEvent" accept="image/*">
+          <label for="eventEmoji">Event Emoji:</label>
+          <input type="text" name="eventEmoji" id="eventEmoji">
+        </div>
+
+        <button type="submit">Add Card</button>
+      </section>
+    </form>
+
+    <div id="error-message" class="error-message"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('card-form');
+    const codeField = document.getElementById('code');
+    const cardTypeField = document.getElementById('card-type');
+    const backCoverFields = document.getElementById('back-cover-fields');
+    const eventCoverFields = document.getElementById('event-cover-fields');
+    const errorMessage = document.getElementById('error-message');
+  
+    // Handle card type change
+    cardTypeField.addEventListener('change', (e) => {
+      if (e.target.value === 'lim-ed') {
+        backCoverFields.style.display = 'block';
+        eventCoverFields.style.display = 'none';
+      } else if (e.target.value === 'event') {
+        backCoverFields.style.display = 'block';
+        eventCoverFields.style.display = 'block';
+      } else {
+        backCoverFields.style.display = 'none';
+        eventCoverFields.style.display = 'none';
+      }
+    });
+  
+    // Handle form submission
+  // Handle form submission
+form.addEventListener('submit', async (e) => {
+  e.preventDefault(); // Prevent default form submission
+
+  // Clear previous error message
+  errorMessage.textContent = '';
+  let hasError = false;
+
+  // Validate required fields
+  const requiredFields = ['name', 'group', 'theme', 'code', 'image'];
+  requiredFields.forEach((field) => {
+    const input = document.getElementById(field);
+    if (!input.value) {
+      input.classList.add('error');
+      hasError = true;
+    } else {
+      input.classList.remove('error');
+    }
+  });
+
+  if (hasError) {
+    errorMessage.textContent = 'Please fill in all required fields.';
+    return;
+  }
+
+  // Check card code uniqueness
+  try {
+    const code = codeField.value.trim();
+    const response = await fetch(`/check-card-code/${encodeURIComponent(code)}`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (data.exists) {
+      errorMessage.textContent = 'Card code already exists. Please use a unique code.';
+      codeField.classList.add('error');
+      return;
+    }
+  } catch (err) {
+    console.error('Error validating card code:', err); // Log any error here
+    errorMessage.textContent = 'Error validating card code. Please try again.';
+    return;
+  }
+
+  // Submit form after validation
+  form.submit();
+});
+
+  </script>
+  
+</body>
+</html>
