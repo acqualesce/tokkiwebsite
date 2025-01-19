@@ -49,7 +49,7 @@ app.use(passport.session());
 passport.use(new DiscordStrategy({
   clientID: '1326882079698456657',
   clientSecret: '9uAntIxBk9iLFFfyaEcnt8sXCH6G8vBW',
-  callbackURL: 'http://localhost:3001/auth/discord/callback',
+  callbackURL: 'https://tokkiwebsite.onrender.com/auth/discord/callback',
   scope: ['identify', 'guilds', 'guilds.members.read'],
 }, async (accessToken, refreshToken, profile, done) => {
   try {
